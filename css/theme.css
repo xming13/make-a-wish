@@ -1,0 +1,76 @@
+body {
+	padding-top: 70px;
+	padding-bottom: 30px;
+	background-color: #F7E5FF;
+}
+
+.theme-dropdown .dropdown-menu {
+	display: block;
+	position: static;
+	margin-bottom: 20px;
+}
+
+.theme-showcase > p > .btn {
+	margin: 5px 0;
+}
+
+#preview-text {
+	min-height: 300px;
+	height: 100%;
+	width: 100%;
+	padding: 5px;
+	text-align: center;
+	font-size: 20px;
+}
+
+#carousel-wishing-shrine {
+}
+.shrine {
+/*	width: 1140px; 
+	height:500px; */
+	width: 100%;
+	min-height: 500px;
+	padding: 5% 15%;
+}
+
+#shrine1 {
+	background: url('../images/pattern1.jpg');
+}
+
+#shrine2 {
+	background: url('../images/pattern2.jpg');
+}
+
+#shrine3 {
+	background: url('../images/pattern3.jpg');
+}
+
+#footer {
+	background-color: #F9D2FF;
+}
+
+.plate {
+	float: left;
+	height: 60px;
+	width: 90px;
+	padding: 20px;
+	margin: 10px;
+	background: rgb(245, 196, 163);
+	cursor: pointer;
+}
+
+#modal-addwish-content {
+	background: yellow;
+}
+
+#modal-carousel-left, #modal-carousel-right {
+	width: 3%;
+}
+
+#glyphicon-chevron-left-custom {
+	left: 0%;
+}
+
+#glyphicon-chevron-right-custom {
+	right: 0%;
+}
