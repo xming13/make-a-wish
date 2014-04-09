@@ -10,9 +10,12 @@
 
     <title>Make A Wish</title>
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+
     <!-- Bootstrap theme -->
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet">  
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+    <!-- <link rel="stylesheet" href="css/bootstrap-theme.min.css"> -->
     <!-- font awesome -->
     <!-- <link href="css/font-awesome-old.css" rel="stylesheet"> -->
     <!-- jquery-ui.css -->
@@ -26,7 +29,8 @@
 
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <!--<script src="js/bootstrap.min.js"></script>-->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <!-- rdbhost database script -->
     <script src="js/rdb/jquery.rdbhost.js"></script>
     <script src="js/rdb/jquery.rdbhost.utils.js"></script>
@@ -95,7 +99,7 @@
               wishlist[shrineid][plateid] = { "templateid" : templateid, "wish" : wish };
               $plate = $('#plate-' + shrineid + '-' + plateid);
               $plate.attr('data-target', '#modal-viewwish');
-              $plate.parent().css('background', 'url(' + preloadArr[templateid].src + ')');
+              $plate.css('background', 'url(' + preloadArr[templateid].src + ')');
               $form.find("#wish").val("");
             },
             'errback': function (errObj) {
@@ -113,6 +117,7 @@
           $('#hid-plateid').val(plateid);
           currImgIndex = 0;
           $('#modal-addwish-content').css('background', 'url(' + preloadArr[currImgIndex].src + ')');
+          fixPaddingOnModalShow();
         });
 
         $('#modal-viewwish').on('show.bs.modal', function (e) {
@@ -122,7 +127,11 @@
           $('#wish-text').html(wishlist[shrineid][plateid].wish);
           var templateid = wishlist[shrineid][plateid].templateid;
           $('#modal-viewwish-content').css('background', 'url(' + preloadArr[templateid].src + ')');
+          fixPaddingOnModalShow();
         });
+
+        $('#modal-addwish, #modal-viewwish').on('hidden.bs.modal', fixPaddingOnModalHide);
+        // $().on('hidden.bs.modal', fixPaddingOnModalHide);
 
         $('#modal-carousel-left').click(function() {
           currImgIndex = ++currImgIndex%preloadArr.length;
@@ -149,7 +158,7 @@
                   wishlist[shrineid][plateid] = { "templateid" : templateid, "wish" : wish };
                   $plate = $('#plate-' + shrineid + '-' + plateid);
                   $plate.attr('data-target', '#modal-viewwish');
-                  $plate.parent().css('background', 'url(' + preloadArr[templateid].src + ')');
+                  $plate.css('background', 'url(' + preloadArr[templateid].src + ')');
                 }
                 $('#carousel-wishing-shrine').css('display', 'block');
               },
@@ -182,6 +191,29 @@
           $status.fadeOut(3000, function() {
             $(this).remove();
           });
+        }
+
+        function measureScrollBar() {
+          var scrollDiv = document.createElement('div');
+          scrollDiv.className = 'scrollbar-measure';
+          document.body.appendChild(scrollDiv);
+          var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+          document.body.removeChild(scrollDiv);
+          return scrollbarWidth;
+        }
+
+        function fixPaddingOnModalShow() {
+          if (this.clientHeight < window.innerHeight) return;
+          var scrollbarWidth = measureScrollBar();
+          if (scrollbarWidth) {
+            $(document.body).css('padding-right', scrollbarWidth);
+            $('.navbar-fixed-top').css('padding-right', scrollbarWidth);
+          }
+        }
+
+        function fixPaddingOnModalHide() {
+          $(document.body).css('padding-right', 0);
+          $('.navbar-fixed-top').css('padding-right', 0);
         }
       });
     </script>
@@ -227,111 +259,51 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
           <div class="item active">
-            <div id="shrine1" class="shrine">
-              <div class="plate">
-                <div id="plate-1-1" data-toggle="modal" data-target="#modal-addwish">
-                  plate1
-                </div>
+            <div id="shrine0" class="shrine">
+              <div class="plate" id="plate-0-1" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-                <div id="plate-1-2" data-toggle="modal" data-target="#modal-addwish">
-                  plate2
-                </div>
+              <div class="plate" id="plate-0-2" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-                <div id="plate-1-3" data-toggle="modal" data-target="#modal-addwish">
-                  plate3
-                </div>
+              <div class="plate" id="plate-0-3" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-                <div id="plate-1-4" data-toggle="modal" data-target="#modal-addwish">
-                  plate4
-                </div>
+              <div class="plate" id="plate-0-4" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-                <div id="plate-1-5" data-toggle="modal" data-target="#modal-addwish">
-                  plate5
-                </div>
+              <div class="plate" id="plate-0-5" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-                <div id="plate-1-6" data-toggle="modal" data-target="#modal-addwish">
-                  plate6
-                </div>
+              <div class="plate" id="plate-0-6" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-                <div id="plate-1-7" data-toggle="modal" data-target="#modal-addwish">
-                  plate7
-                </div>
+              <div class="plate" id="plate-0-7" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-                <div id="plate-1-8" data-toggle="modal" data-target="#modal-addwish">
-                  plate8
-                </div>
+              <div class="plate" id="plate-0-8" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-                <div id="plate-1-9" data-toggle="modal" data-target="#modal-addwish">
-                  plate9
-                </div>
+              <div class="plate" id="plate-0-9" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-                <div id="plate-1-10" data-toggle="modal" data-target="#modal-addwish">
-                  plate10
-                </div>
+              <div class="plate" id="plate-0-10" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-                <div id="plate-1-11" data-toggle="modal" data-target="#modal-addwish">
-                  plate11
-                </div>
+              <div class="plate" id="plate-0-11" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-                <div id="plate-1-12" data-toggle="modal" data-target="#modal-addwish">
-                  plate12
-                </div>
+              <div class="plate" id="plate-0-12" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-                <div id="plate-1-13" data-toggle="modal" data-target="#modal-addwish">
-                  plate13
-                </div>
+              <div class="plate" id="plate-0-13" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-                <div id="plate-1-14" data-toggle="modal" data-target="#modal-addwish">
-                  plate14
-                </div>
+              <div class="plate" id="plate-0-14" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-                <div id="plate-1-15" data-toggle="modal" data-target="#modal-addwish">
-                  plate15
-                </div>
+              <div class="plate" id="plate-0-15" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-                <div id="plate-1-16" data-toggle="modal" data-target="#modal-addwish">
-                  plate16
-                </div>
+              <div class="plate" id="plate-0-16" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-                <div id="plate-1-17" data-toggle="modal" data-target="#modal-addwish">
-                  plate17
-                </div>
+              <div class="plate" id="plate-0-17" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-                <div id="plate-1-18" data-toggle="modal" data-target="#modal-addwish">
-                  plate18
-                </div>
+              <div class="plate" id="plate-0-18" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-                <div id="plate-1-19" data-toggle="modal" data-target="#modal-addwish">
-                  plate19
-                </div>
+              <div class="plate" id="plate-0-19" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-                <div id="plate-1-20" data-toggle="modal" data-target="#modal-addwish">
-                  plate20
-                </div>
+              <div class="plate" id="plate-0-20" data-toggle="modal" data-target="#modal-addwish">
               </div>
             </div>
           </div>
           <div class="item">
-            <div id="shrine2" class="shrine">
+            <div id="shrine1" class="shrine">
               <div class="btn-three-d">
                 <button class="btn btn-rotate-left">Left</button>
                 <button class="btn btn-rotate-right">Right</button>
@@ -339,105 +311,45 @@
               <section class="threed">
                 <div id="threedbox" class="show-front">
                   <figure class="front">
-                    <div class="plate">
-                      <div id="plate-2-1" data-toggle="modal" data-target="#modal-addwish">
-                        plate1
-                      </div>
+                    <div class="plate" id="plate-1-1" data-toggle="modal" data-target="#modal-addwish">
                     </div>
-                    <div class="plate">
-                      <div id="plate-2-2" data-toggle="modal" data-target="#modal-addwish">
-                        plate2
-                      </div>
+                    <div class="plate" id="plate-1-2" data-toggle="modal" data-target="#modal-addwish">
                     </div>
-                    <div class="plate">
-                      <div id="plate-2-3" data-toggle="modal" data-target="#modal-addwish">
-                        plate3
-                      </div>
+                    <div class="plate" id="plate-1-3" data-toggle="modal" data-target="#modal-addwish">
                     </div>
-                    <div class="plate">
-                      <div id="plate-2-4" data-toggle="modal" data-target="#modal-addwish">
-                        plate4
-                      </div>
+                    <div class="plate" id="plate-1-4" data-toggle="modal" data-target="#modal-addwish">
                     </div>
-                    <div class="plate">
-                      <div id="plate-2-5" data-toggle="modal" data-target="#modal-addwish">
-                        plate5
-                      </div>
+                    <div class="plate" id="plate-1-5" data-toggle="modal" data-target="#modal-addwish">
                     </div>
-                    <div class="plate">
-                      <div id="plate-2-6" data-toggle="modal" data-target="#modal-addwish">
-                        plate6
-                      </div>
+                    <div class="plate" id="plate-1-6" data-toggle="modal" data-target="#modal-addwish">
                     </div>
-                    <div class="plate">
-                      <div id="plate-2-7" data-toggle="modal" data-target="#modal-addwish">
-                        plate7
-                      </div>
+                    <div class="plate" id="plate-1-7" data-toggle="modal" data-target="#modal-addwish">
                     </div>
-                    <div class="plate">
-                      <div id="plate-2-8" data-toggle="modal" data-target="#modal-addwish">
-                        plate8
-                      </div>
+                    <div class="plate" id="plate-1-8" data-toggle="modal" data-target="#modal-addwish">
                     </div>
-                    <div class="plate">
-                      <div id="plate-2-9" data-toggle="modal" data-target="#modal-addwish">
-                        plate9
-                      </div>
+                    <div class="plate" id="plate-1-9" data-toggle="modal" data-target="#modal-addwish">
                     </div>
-                    <div class="plate">
-                      <div id="plate-2-10" data-toggle="modal" data-target="#modal-addwish">
-                        plate10
-                      </div>
+                    <div class="plate" id="plate-1-10" data-toggle="modal" data-target="#modal-addwish">
                     </div>
-                    <div class="plate">
-                      <div id="plate-2-11" data-toggle="modal" data-target="#modal-addwish">
-                        plate11
-                      </div>
+                    <div class="plate" id="plate-1-11" data-toggle="modal" data-target="#modal-addwish">
                     </div>
-                    <div class="plate">
-                      <div id="plate-2-12" data-toggle="modal" data-target="#modal-addwish">
-                        plate12
-                      </div>
+                    <div class="plate" id="plate-1-12" data-toggle="modal" data-target="#modal-addwish">
                     </div>
-                    <div class="plate">
-                      <div id="plate-2-13" data-toggle="modal" data-target="#modal-addwish">
-                        plate13
-                      </div>
+                    <div class="plate" id="plate-1-13" data-toggle="modal" data-target="#modal-addwish">
                     </div>
-                    <div class="plate">
-                      <div id="plate-2-14" data-toggle="modal" data-target="#modal-addwish">
-                        plate14
-                      </div>
+                    <div class="plate" id="plate-1-14" data-toggle="modal" data-target="#modal-addwish">
                     </div>
-                    <div class="plate">
-                      <div id="plate-2-15" data-toggle="modal" data-target="#modal-addwish">
-                        plate15
-                      </div>
+                    <div class="plate" id="plate-1-15" data-toggle="modal" data-target="#modal-addwish">
                     </div>
-                    <div class="plate">
-                      <div id="plate-2-16" data-toggle="modal" data-target="#modal-addwish">
-                        plate16
-                      </div>
+                    <div class="plate" id="plate-1-16" data-toggle="modal" data-target="#modal-addwish">
                     </div>
-                    <div class="plate">
-                      <div id="plate-2-17" data-toggle="modal" data-target="#modal-addwish">
-                        plate17
-                      </div>
+                    <div class="plate" id="plate-1-17" data-toggle="modal" data-target="#modal-addwish">
                     </div>
-                    <div class="plate">
-                      <div id="plate-2-18" data-toggle="modal" data-target="#modal-addwish">
-                        plate18
-                      </div>
+                    <div class="plate" id="plate-1-18" data-toggle="modal" data-target="#modal-addwish">
                     </div>
-                    <div class="plate">
-                      <div id="plate-2-19" data-toggle="modal" data-target="#modal-addwish">
-                        plate19
-                      </div>
+                    <div class="plate" id="plate-1-19" data-toggle="modal" data-target="#modal-addwish">
                     </div>
-                    <div class="plate">
-                      <div id="plate-2-20" data-toggle="modal" data-target="#modal-addwish">
-                        plate20
-                      </div>
+                    <div class="plate" id="plate-1-20" data-toggle="modal" data-target="#modal-addwish">
                     </div>
                   </figure>
                   <figure class="right"></figure>
@@ -448,106 +360,46 @@
             </div>     
           </div>
           <div class="item">
-            <div id="shrine3" class="shrine">
-              <div class="plate">
-                <div id="plate-3-1" data-toggle="modal" data-target="#modal-addwish">
-                  plate1
-                </div>
+            <div id="shrine2" class="shrine">
+              <div class="plate" id="plate-2-1" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-                <div id="plate-3-2" data-toggle="modal" data-target="#modal-addwish">
-                  plate2
-                </div>
+              <div class="plate" id="plate-2-2" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-                <div id="plate-3-3" data-toggle="modal" data-target="#modal-addwish">
-                  plate3
-                </div>
+              <div class="plate" id="plate-2-3" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-               <div id="plate-3-4" data-toggle="modal" data-target="#modal-addwish">
-                  plate4
-                </div>
+              <div class="plate" id="plate-2-4" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-               <div id="plate-3-5" data-toggle="modal" data-target="#modal-addwish">
-                  plate5
-                </div>
+              <div class="plate" id="plate-2-5" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-               <div id="plate-3-6" data-toggle="modal" data-target="#modal-addwish">
-                  plate6
-                </div>
+              <div class="plate" id="plate-2-6" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-               <div id="plate-3-7" data-toggle="modal" data-target="#modal-addwish">
-                  plate7
-                </div>
+              <div class="plate" id="plate-2-7" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-               <div id="plate-3-8" data-toggle="modal" data-target="#modal-addwish">
-                  plate8
-                </div>
+              <div class="plate" id="plate-2-8" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-               <div id="plate-3-9" data-toggle="modal" data-target="#modal-addwish">
-                  plate9
-                </div>
+              <div class="plate" id="plate-2-9" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-               <div id="plate-3-10" data-toggle="modal" data-target="#modal-addwish">
-                  plate10
-                </div>
+              <div class="plate" id="plate-2-10" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-               <div id="plate-3-11" data-toggle="modal" data-target="#modal-addwish">
-                  plate11
-                </div>
+              <div class="plate" id="plate-2-11" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-               <div id="plate-3-12" data-toggle="modal" data-target="#modal-addwish">
-                  plate12
-                </div>
+              <div class="plate" id="plate-2-12" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-               <div id="plate-3-13" data-toggle="modal" data-target="#modal-addwish">
-                  plate13
-                </div>
+              <div class="plate" id="plate-2-13" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-               <div id="plate-3-14" data-toggle="modal" data-target="#modal-addwish">
-                  plate14
-                </div>
+              <div class="plate" id="plate-2-14" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-               <div id="plate-3-15" data-toggle="modal" data-target="#modal-addwish">
-                  plate15
-                </div>
+              <div class="plate" id="plate-2-15" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-               <div id="plate-3-16" data-toggle="modal" data-target="#modal-addwish">
-                  plate16
-                </div>
+              <div class="plate" id="plate-2-16" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-               <div id="plate-3-17" data-toggle="modal" data-target="#modal-addwish">
-                  plate17
-                </div>
+              <div class="plate" id="plate-2-17" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-               <div id="plate-3-18" data-toggle="modal" data-target="#modal-addwish">
-                  plate18
-                </div>
+              <div class="plate" id="plate-2-18" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-               <div id="plate-3-19" data-toggle="modal" data-target="#modal-addwish">
-                  plate19
-                </div>
+              <div class="plate" id="plate-2-19" data-toggle="modal" data-target="#modal-addwish">
               </div>
-              <div class="plate">
-               <div id="plate-3-20" data-toggle="modal" data-target="#modal-addwish">
-                  plate20
-                </div>
+              <div class="plate" id="plate-2-20" data-toggle="modal" data-target="#modal-addwish">
               </div>
             </div>
           </div>
